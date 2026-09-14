@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "brianirish.mouse-battery",
+  "name": "Mouse battery",
+  "version": "1.0.0",
+  "author": "Brian Irish",
+  "description": "Battery level of a wireless mouse or keyboard in the bar, straight from UPower — no polling, no vendor daemon",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Widget.qml"
+  },
+  "barWidget": {
+    "displayName": "Mouse battery",
+    "description": "Wireless mouse/keyboard battery level from UPower",
+    "category": "System",
+    "allowMultiple": false,
+    "defaultSection": "right",
+    "defaults": { "showPercentage": true, "onClick": "openlogi-desktop" }
+  }
+}
