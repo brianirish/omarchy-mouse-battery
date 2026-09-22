@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "brianirish.mouse-battery",
   "name": "Mouse battery",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "Brian Irish",
   "description": "Battery level of a wireless mouse or keyboard in the bar, straight from UPower — no polling, no vendor daemon",
   "kinds": [

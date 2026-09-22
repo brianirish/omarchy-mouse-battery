@@ -62,27 +62,43 @@ BarWidget {
     if (root.bar && root.clickCommand !== "") root.bar.run(root.clickCommand)
   }
 
+  function pollSolaar() {
+    if (!solaarProc.running) solaarProc.running = true
+  }
+
   Timer {
     interval: root.solaarInterval * 1000
     repeat: true
     running: root.useSolaar
     triggeredOnStart: true
-    onTriggered: if (!solaarProc.running) solaarProc.running = true
+    onTriggered: root.pollSolaar()
   }
 
-  // A sleeping device can stall HID++ requests; never let a poll hang.
+  // A failed poll with nothing to show yet retries soon rather than leaving
+  // the widget hidden for a whole interval.
   Timer {
+    id: solaarRetry
     interval: 30000
-    running: solaarProc.running
-    onTriggered: solaarProc.running = false
+    running: false
+    onTriggered: if (root.useSolaar) root.pollSolaar()
   }
 
+  // One widget per bar means one per monitor, and concurrent `solaar show`
+  // runs trample each other's HID++ requests (they crash or hang). flock
+  // serialises them across instances; timeout keeps a stalled device (asleep
+  // mid-request) from holding the lock forever.
   Process {
     id: solaarProc
-    command: ["solaar", "show"]
+    command: ["sh", "-c",
+      "exec flock -w 45 \"${XDG_RUNTIME_DIR:-/tmp}/brianirish.mouse-battery.solaar.lock\" timeout 20 solaar show"]
     stdout: StdioCollector { id: solaarOut; waitForEnd: true }
     onExited: function(code) {
-      root.solaarDevices = code === 0 ? Model.parseSolaar(solaarOut.text, root.types(), root.states()) : []
+      if (code === 0) {
+        root.solaarDevices = Model.parseSolaar(solaarOut.text, root.types(), root.states())
+      } else if (root.solaarDevices.length === 0) {
+        // Keep the last good reading on a transient failure.
+        solaarRetry.restart()
+      }
     }
   }
 

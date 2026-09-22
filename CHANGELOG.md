@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-09-22
+
+### Fixed
+
+- The Solaar fallback no longer fails on multi-monitor setups. Each bar runs
+  its own copy of the widget, and simultaneous `solaar show` runs corrupt
+  each other's HID++ requests (they crash or hang), so the widget stayed
+  hidden. Polls are now serialised with `flock` and capped with `timeout`.
+- A failed poll keeps the last good reading, and when there is none yet it
+  retries after 30 seconds instead of waiting a full `solaarInterval`.
+
 ## [1.1.0] - 2026-09-22
 
 ### Added
