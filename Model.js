@@ -77,6 +77,54 @@ function barText(device, layout, types, states) {
   return icon
 }
 
+// Fallback source: `solaar show` talks HID++ over hidraw, so it can read
+// devices behind receivers the kernel driver doesn't bind (Logi Bolt), which
+// UPower never sees. Returns objects shaped like UPower devices so every
+// helper above works on them unchanged.
+var SOLAAR_KINDS = { mouse: "Mouse", trackball: "Mouse", touchpad: "Touchpad", keyboard: "Keyboard", numpad: "Keyboard" }
+// Solaar's names for coarse HID++ levels (BatteryLevelApproximation).
+var SOLAAR_LEVELS = { empty: 0, critical: 5, low: 20, average: 50, good: 50, full: 90 }
+
+function solaarState(status, states) {
+  var s = String(status).replace(/^BatteryStatus\./, "").trim().toLowerCase().replace(/ /g, "_")
+  if (s === "full") return states.FullyCharged
+  if (s === "recharging" || s === "almost_full" || s === "slow_recharge") return states.Charging
+  if (s === "discharging") return states.Discharging
+  return states.Unknown || 0
+}
+
+function parseSolaar(text, types, states) {
+  var devices = []
+  var current = null
+  var lines = String(text || "").split("\n")
+  function flush() {
+    if (current && current.type !== undefined && current.percentage !== undefined) devices.push(current)
+    current = null
+  }
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i]
+    var m
+    if ((m = /^ {2}\d+: (.+?)\s*$/.exec(line))) {
+      flush()
+      current = { isPresent: true, model: m[1] }
+    } else if (!current) {
+      continue
+    } else if ((m = /^ {5}Kind\s*: (\S+)/.exec(line))) {
+      var kind = SOLAAR_KINDS[m[1].toLowerCase()]
+      if (kind) current.type = types[kind]
+    } else if ((m = /^ {5}Battery: ([^,]+), (.+?)(?:, next level .*)?\.\s*$/.exec(line))) {
+      var level = m[1].trim()
+      var pct = /^(\d+)%/.exec(level)
+      var value = pct ? Number(pct[1]) : SOLAAR_LEVELS[level.toLowerCase()]
+      if (value === undefined) continue
+      current.percentage = value / 100
+      current.state = solaarState(m[2], states)
+    }
+  }
+  flush()
+  return devices
+}
+
 if (typeof module !== "undefined") {
   module.exports = {
     pickDevice: pickDevice,
@@ -88,6 +136,7 @@ if (typeof module !== "undefined") {
     stateLabel: stateLabel,
     deviceName: deviceName,
     tooltip: tooltip,
-    barText: barText
+    barText: barText,
+    parseSolaar: parseSolaar
   }
 }

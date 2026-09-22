@@ -5,7 +5,8 @@
 
 A bar widget for [Omarchy](https://omarchy.org) that shows the battery level
 of your wireless mouse (or keyboard) — read straight from UPower, with no
-polling and no vendor daemon.
+polling and no vendor daemon. Devices on a Logi Bolt receiver, which the
+kernel can't read, are picked up through [Solaar](https://github.com/pwr-Solaar/Solaar).
 
 ![The widget in the bar](docs/bar.png)
 
@@ -24,6 +25,8 @@ are invisible. This widget fills that gap:
 - Works with any device UPower classifies as a mouse, keyboard, touchpad, or
   gaming input — Logitech Unifying/Bolt receivers, Bluetooth HID++ devices,
   anything the `hid-logitech-hidpp` driver or Bluetooth battery profile exposes
+- Logi Bolt receivers too, via an optional `solaar show` fallback (see
+  [Bolt receivers](#bolt-receivers))
 
 ## Install
 
@@ -50,7 +53,8 @@ or any other `omarchy bar move` placement.
   ```
 
   If nothing is listed, the kernel has no battery information for the device
-  and the widget stays hidden. See [Troubleshooting](#troubleshooting).
+  and the widget stays hidden, unless Solaar can read it (see
+[Bolt receivers](#bolt-receivers)). See [Troubleshooting](#troubleshooting).
 
 ## Settings
 
@@ -61,6 +65,7 @@ Settings live inline on the widget's `shell.json` entry and can be changed with
 |---|---|---|
 | `showPercentage` | `true` | Show `󰍽 55% 󰁿`. Set to `false` for the battery glyph alone (the percentage stays in the tooltip). Vertical bars always use the glyph-only form. |
 | `onClick` | `"openlogi-desktop"` | Command run on left-click. Set to `""` to disable. |
+| `solaarInterval` | `300` | Seconds between `solaar show` polls while UPower has no device (see [Bolt receivers](#bolt-receivers)). `0` disables the fallback. |
 
 ```bash
 omarchy bar set brianirish.mouse-battery showPercentage false
@@ -82,6 +87,29 @@ the first present device whose type is Mouse, Keyboard, Touchpad, or
 GamingInput. Everything to the left of the widget in the diagram is already
 running on a stock Omarchy install; the widget adds no polling, no timers, and
 never talks to the device. Updates arrive as D-Bus property-change signals.
+The one exception is the [Bolt fallback](#bolt-receivers), which only runs
+when UPower has no device to offer.
+
+### Bolt receivers
+
+The kernel's `hid-logitech-dj` driver supports Unifying and Nano receivers
+but not **Logi Bolt** (`046d:c548`). Devices paired to a Bolt receiver still
+work as a mouse, but no battery information reaches `/sys/class/power_supply`,
+so UPower never sees them.
+
+For those, the widget falls back to [Solaar](https://github.com/pwr-Solaar/Solaar),
+which speaks HID++ to the receiver directly:
+
+```bash
+sudo pacman -S solaar   # also installs the udev rules that let your user open the receiver
+```
+
+The fallback only runs while UPower reports no mouse or keyboard. It then runs
+`solaar show` every `solaarInterval` seconds (5 minutes by default; each run
+takes a few seconds) and shows the first mouse, trackball, touchpad or
+keyboard that reports a battery level. Without Solaar installed nothing
+happens and the widget stays hidden as before. Devices UPower can see always
+take priority, and for them nothing is polled.
 
 ### Why does it say 55% when my mouse app says 50%?
 
@@ -96,7 +124,9 @@ percentages and the widget shows them as-is.
 ## Troubleshooting
 
 **Widget doesn't appear.** It's hidden when no device matches. Run
-`upower -e`; if your mouse isn't listed, UPower can't see it. For Logitech
+`upower -e`; if your mouse isn't listed, UPower can't see it. On a Bolt
+receiver (`lsusb | grep -i bolt`) install Solaar and check that `solaar show`
+prints a `Battery:` line for the device. For Logitech
 receivers make sure `hid-logitech-hidpp` is loaded (`lsmod | grep hidpp`) —
 it is on stock Arch kernels. For Bluetooth mice the device must expose the
 Battery Service profile.

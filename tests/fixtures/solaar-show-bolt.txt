@@ -1,0 +1,102 @@
+solaar version 1.1.20
+
+Bolt Receiver
+  Device path  : /dev/hidraw5
+  USB id       : 046d:C548
+  Serial       : 00000000000000000000000000000000
+  Has 1 paired device(s) out of a maximum of 6.
+  Notifications: wireless (0x000100)
+  Device activity counters: 2=129
+
+  2: LIFT VERTICAL ERGONOMIC MOUSE
+     Device path  : None
+     WPID         : B031
+     Codename     : LIFT
+     Kind         : mouse
+     Protocol     : HID++ 4.5
+     Serial number: 00000000
+     Model ID:      B03100000000
+     Unit ID:       00000000
+                 1: BL1 56.10.B0011
+                 0: RBM 21.10.B0011
+                 3: 
+     The power switch is located on the (unknown).
+     Supports 32 HID++ 2.0 features:
+         0: ROOT                   {0000} V0     
+         1: FEATURE SET            {0001} V0     
+         2: DEVICE FW VERSION      {0003} V4     
+            Firmware: 1 BL1 56.10.B0011 B031430D065F
+            Firmware: 0 RBM 21.10.B0011 B031430D065F
+            Firmware: 3   
+            Unit ID: 00000000  Model ID: B03100000000  Transport IDs: {'btleid': 'B031'}
+         3: DEVICE NAME            {0005} V0     
+            Name: LIFT VERTICAL ERGONOMIC MOUSE
+            Kind: mouse
+         4: WIRELESS DEVICE STATUS {1D4B} V0     
+         5: CONFIG CHANGE          {0020} V0     
+            Configuration: 00000000000000000000000000000000
+         6: CRYPTO ID              {0021} V1     
+         7: DEVICE FRIENDLY NAME   {0007} V0     
+            Friendly Name: LIFT
+         8: UNIFIED BATTERY        {1004} V3     
+            Battery: 100%, BatteryStatus.DISCHARGING.
+         9: REPROG CONTROLS V4     {1B04} V5     
+            Key/Button Actions (saved): {Middle Button:Mouse Middle Button, Back Button:Mouse Back Button, Forward Button:Mouse Forward Button, DPI Switch:Dpi Switch}
+            Key/Button Actions        : {Middle Button:Mouse Middle Button, Back Button:Mouse Back Button, Forward Button:Mouse Forward Button, DPI Switch:Dpi Switch}
+            Key/Button Diversion (saved): {Middle Button:Regular, Back Button:Regular, Forward Button:Regular, DPI Switch:Diverted}
+            Key/Button Diversion        : {Middle Button:Regular, Back Button:Regular, Forward Button:Regular, DPI Switch:Diverted}
+        10: CHANGE HOST            {1814} V1     
+            Change Host        : 1:myhost
+        11: HOSTS INFO             {1815} V2     
+            Host 0 (paired): myhost
+            Host 1 (unpaired): 
+            Host 2 (unpaired): 
+        12: XY STATS               {2250} V1     
+        13: LOWRES WHEEL           {2130} V0     
+            Wheel Reports: HID
+            Scroll Wheel Diversion (saved): False
+            Scroll Wheel Diversion        : False
+        14: ADJUSTABLE DPI         {2201} V2     
+            Sensitivity (DPI) (saved): 1000
+            Sensitivity (DPI)        : 1000
+        15: DFUCONTROL             {00C3} V0     
+        16: DEVICE RESET           {1802} V0     
+        17: unknown:1803           {0318} V0    internal, hidden, unknown:000010 
+        18: CONFIG DEVICE PROPS    {1806} V8     
+        19: BLE PRO PRE PAIRING    {1816} V0     
+        20: OOBSTATE               {1805} V0     
+        21: unknown:1830           {3018} V0    internal, hidden, unknown:000010 
+        22: unknown:1891           {9118} V0    internal, hidden, unknown:000008 
+        23: unknown:18A1           {A118} V0    internal, hidden, unknown:000010 
+        24: ENABLE HIDDEN FEATURES {1E00} V0     
+        25: unknown:1E02           {021E} V0    internal, hidden 
+        26: unknown:1E22           {221E} V0    internal, hidden, unknown:000010 
+        27: unknown:1602           {0216} V0     
+        28: unknown:1EB0           {B01E} V0    internal, hidden, unknown:000010 
+        29: unknown:1861           {6118} V0    internal, hidden, unknown:000010 
+        30: unknown:18B1           {B118} V0    internal, hidden, unknown:000010 
+        31: unknown:920A           {0A92} V0    internal, hidden, unknown:000010 
+     Has 7 reprogrammable keys:
+         0: Left Button               , default: Left Click                  => Left Click                
+             analytics_key_events, mse, pos:0, group:1, group mask:empty
+             reporting: default
+         1: Right Button              , default: Right Click                 => Right Click               
+             analytics_key_events, mse, pos:0, group:1, group mask:empty
+             reporting: default
+         2: Middle Button             , default: Mouse Middle Button         => Mouse Middle Button       
+             analytics_key_events, raw_xy, divertable, reprogrammable, mse, pos:0, group:3, group mask:g1,g2,g3
+             reporting: default
+         3: Back Button               , default: Mouse Back Button           => Mouse Back Button         
+             raw_wheel, analytics_key_events, raw_xy, divertable, reprogrammable, mse, pos:0, group:2, group mask:g1,g2
+             reporting: default
+         4: Forward Button            , default: Mouse Forward Button        => Mouse Forward Button      
+             raw_wheel, analytics_key_events, raw_xy, divertable, reprogrammable, mse, pos:0, group:2, group mask:g1,g2
+             reporting: default
+         5: DPI Switch                , default: Dpi Switch                  => Dpi Switch                
+             analytics_key_events, raw_xy, divertable, reprogrammable, mse, pos:0, group:3, group mask:g1,g2,g3
+             reporting: ['diverted']
+         6: Virtual Gesture Button    , default: Virtual Gesture Button      => Virtual Gesture Button    
+             force_raw_xy, raw_xy, virtual, divertable, pos:0, group:4, group mask:empty
+             reporting: default
+     Battery: 100%, BatteryStatus.DISCHARGING.
+

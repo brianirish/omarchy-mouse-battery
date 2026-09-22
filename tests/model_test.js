@@ -116,4 +116,57 @@ test("barText falls back to the battery glyph alone when vertical or percent is 
   assert.equal(Model.barText(mouse, { showPercentage: false, vertical: false }, Type, State), "󰁿");
 });
 
+// parseSolaar — fallback for receivers the kernel driver doesn't bind (Bolt)
+const fs = require("node:fs");
+const boltShow = fs.readFileSync(path.join(__dirname, "fixtures", "solaar-show-bolt.txt"), "utf8");
+
+test("parseSolaar reads a Bolt-paired mouse from real `solaar show` output", () => {
+  const devices = Model.parseSolaar(boltShow, Type, State);
+  assert.equal(devices.length, 1);
+  assert.deepEqual(devices[0], {
+    isPresent: true, type: Type.Mouse, percentage: 1, state: State.Discharging,
+    model: "LIFT VERTICAL ERGONOMIC MOUSE"
+  });
+});
+test("parseSolaar maps kinds, coarse levels and charge states", () => {
+  const text = [
+    "Bolt Receiver",
+    "  Device path  : /dev/hidraw5",
+    "",
+    "  1: MX Keys",
+    "     Kind         : keyboard",
+    "     Battery: 20%, BatteryStatus.RECHARGING.",
+    "  2: MX Master 2S",
+    "     Kind         : mouse",
+    "     Battery: good, BatteryStatus.DISCHARGING, next level 20%.",
+    "  3: MX Ergo",
+    "     Kind         : trackball",
+    "     Battery: 90% 4012mV , full.",
+  ].join("\n");
+  const [keys, master, ergo] = Model.parseSolaar(text, Type, State);
+  assert.deepEqual([keys.type, keys.percentage, keys.state], [Type.Keyboard, 0.2, State.Charging]);
+  assert.deepEqual([master.type, master.percentage, master.state], [Type.Mouse, 0.5, State.Discharging]);
+  assert.deepEqual([ergo.type, ergo.percentage, ergo.state], [Type.Mouse, 0.9, State.FullyCharged]);
+});
+test("parseSolaar skips devices without a readable battery or of other kinds", () => {
+  const text = [
+    "  1: Offline Mouse",
+    "     Kind         : mouse",
+    "     Battery status unavailable.",
+    "  2: G435 Headset",
+    "     Kind         : headset",
+    "     Battery: 80%, BatteryStatus.DISCHARGING.",
+    "  3: Asleep Mouse",
+    "     Kind         : mouse",
+    "     Battery: N/A, None.",
+  ].join("\n");
+  assert.deepEqual(Model.parseSolaar(text, Type, State), []);
+});
+test("parseSolaar ignores the per-feature battery line and tolerates junk", () => {
+  const text = "  1: M720\n     Kind         : mouse\n            Battery: 10%, discharging.\n     Battery: 55%, discharging.\n";
+  assert.equal(Model.parseSolaar(text, Type, State)[0].percentage, 0.55);
+  assert.deepEqual(Model.parseSolaar("", Type, State), []);
+  assert.deepEqual(Model.parseSolaar(undefined, Type, State), []);
+});
+
 console.log(process.exitCode ? "some tests failed" : passed + " tests passed");

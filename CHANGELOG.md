@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-09-22
+
+### Added
+
+- Solaar fallback for Logi Bolt receivers, which the kernel's
+  `hid-logitech-dj` driver doesn't bind, so UPower never sees their devices.
+  While UPower reports no mouse or keyboard, the widget polls `solaar show`
+  (if installed) and parses its battery lines. The new `solaarInterval`
+  setting sets the poll period in seconds (default 300, `0` disables it).
+
 ## [1.0.0] - 2026-09-13
 
 ### Added
