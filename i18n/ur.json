@@ -1,0 +1,11 @@
+{
+  "device.mouse": "وائرلیس ماؤس",
+  "device.keyboard": "وائرلیس کی بورڈ",
+  "percent": "%1%",
+  "state.charging": "چارج ہو رہی ہے",
+  "state.discharging": "ڈسچارج ہو رہی ہے",
+  "state.full": "مکمل چارج",
+  "state.empty": "خالی",
+  "state.unknown": "نامعلوم",
+  "tooltip": "%1 · %2 · %3"
+}

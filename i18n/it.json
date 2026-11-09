@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Mouse wireless",
+  "device.keyboard": "Tastiera wireless",
+  "percent": "%1%",
+  "state.charging": "In carica",
+  "state.discharging": "In scarica",
+  "state.full": "Carica completa",
+  "state.empty": "Scarica",
+  "state.unknown": "Sconosciuto",
+  "tooltip": "%1 · %2 · %3"
+}

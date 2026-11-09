@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Бежични миш",
+  "device.keyboard": "Бежична тастатура",
+  "percent": "%1%",
+  "state.charging": "Пуни се",
+  "state.discharging": "Празни се",
+  "state.full": "Потпуно напуњена",
+  "state.empty": "Празна",
+  "state.unknown": "Непознато",
+  "tooltip": "%1 · %2 · %3"
+}

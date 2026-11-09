@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Wireless na mouse",
+  "device.keyboard": "Wireless na keyboard",
+  "percent": "%1%",
+  "state.charging": "Nagcha-charge",
+  "state.discharging": "Nagdi-discharge",
+  "state.full": "Puno ang charge",
+  "state.empty": "Ubos",
+  "state.unknown": "Hindi alam",
+  "tooltip": "%1 · %2 · %3"
+}

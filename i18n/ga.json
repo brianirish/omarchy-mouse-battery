@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Luch gan sreang",
+  "device.keyboard": "Méarchlár gan sreang",
+  "percent": "%1%",
+  "state.charging": "Á luchtú",
+  "state.discharging": "Ag díluchtú",
+  "state.full": "Luchtaithe go hiomlán",
+  "state.empty": "Folamh",
+  "state.unknown": "Anaithnid",
+  "tooltip": "%1 · %2 · %3"
+}

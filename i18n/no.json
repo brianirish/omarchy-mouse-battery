@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Trådløs mus",
+  "device.keyboard": "Trådløst tastatur",
+  "percent": "%1%",
+  "state.charging": "Lader",
+  "state.discharging": "Lades ut",
+  "state.full": "Fulladet",
+  "state.empty": "Tom",
+  "state.unknown": "Ukjent",
+  "tooltip": "%1 · %2 · %3"
+}

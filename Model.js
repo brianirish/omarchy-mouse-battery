@@ -1,6 +1,34 @@
 // Pure helpers for the mouse-battery widget. No QML imports, so the same
 // file runs under Node for tests/model_test.js. Quickshell's UPower enums
 // are passed in as plain objects (`types`, `states`) rather than imported.
+//
+// Text comes from the i18n/ catalogs through `tr`, anything with t(key) and
+// tn(key, count): the widget's Commons.Translations in the shell, the
+// tests/tr.js stand-in under Node. Numbers come through `formatNumber`
+// (Commons.I18n.formatNumber in the shell), so they take the language's
+// digits; it defaults to plain String() here.
+
+// Fills %1, %2, … from values, the way QML's String.arg() does; Node has no
+// arg(). Only %<digit> is a placeholder, so "%%1" in a Turkish catalog
+// reads "%55".
+function fill(template, values) {
+  return String(template).replace(/%(\d)/g, function(match, n) {
+    var value = values[Number(n) - 1]
+    return value === undefined ? match : String(value)
+  })
+}
+
+function number(value, formatNumber) {
+  return formatNumber ? formatNumber(value) : String(value)
+}
+
+// A boolean setting. `omarchy bar set <id> <key> true` without --json
+// stores the string "true", so the strings count as well.
+function flag(value, fallback) {
+  if (value === true || value === "true") return true
+  if (value === false || value === "false") return false
+  return fallback
+}
 
 function pickDevice(list, types) {
   var values = list || []
@@ -45,36 +73,48 @@ function batteryIcon(device, states) {
   return charging(device, states) ? chargingIcons[index] : defaultIcons[index]
 }
 
-function stateLabel(device, states) {
+function stateLabel(device, states, tr) {
   if (!device || !device.isPresent) return ""
   switch (device.state) {
-    case states.Charging: return "Charging"
-    case states.Discharging: return "Discharging"
-    case states.FullyCharged: return "Fully charged"
-    case states.Empty: return "Empty"
-    default: return "Unknown"
+    case states.Charging: return tr.t("state.charging")
+    case states.Discharging: return tr.t("state.discharging")
+    case states.FullyCharged: return tr.t("state.full")
+    case states.Empty: return tr.t("state.empty")
+    default: return tr.t("state.unknown")
   }
 }
 
-function deviceName(device, types) {
+// The device's own model name, or a generic one. The model name comes from
+// the device, so it is only ever shown as plain text.
+function deviceName(device, types, tr) {
   var model = device && device.model ? String(device.model).trim() : ""
   if (model) return model
-  if (types && device && device.type === types.Keyboard) return "Wireless keyboard"
-  return "Wireless mouse"
+  if (types && device && device.type === types.Keyboard) return tr.t("device.keyboard")
+  return tr.t("device.mouse")
 }
 
-function tooltip(device, states, types) {
+function percentText(device, tr, formatNumber) {
+  return fill(tr.t("percent"), [number(percent(device), formatNumber)])
+}
+
+function tooltip(device, states, types, tr, formatNumber) {
   if (!device || !device.isPresent) return ""
-  return deviceName(device, types) + " · " + percent(device) + "% · " + stateLabel(device, states)
+  return fill(tr.t("tooltip"), [deviceName(device, types, tr), percentText(device, tr, formatNumber), stateLabel(device, states, tr)])
 }
 
-function barText(device, layout, types, states) {
-  var icon = batteryIcon(device, states)
-  if (!icon) return ""
-  if (layout.showPercentage && !layout.vertical) {
-    return deviceIcon(device, types) + " " + percent(device) + "% " + icon
-  }
-  return icon
+// The bar shows the battery glyph as its icon and, horizontally with
+// showPercentage on, a label before it: the device glyph and the percent.
+function barIcon(device, states) {
+  return batteryIcon(device, states)
+}
+
+function showsLabel(layout) {
+  return layout.showPercentage === true && !layout.vertical
+}
+
+function barLabel(device, layout, types, tr, formatNumber) {
+  if (!device || !device.isPresent || !showsLabel(layout)) return ""
+  return deviceIcon(device, types) + " " + percentText(device, tr, formatNumber)
 }
 
 // Fallback source: `solaar show` talks HID++ over hidraw, so it can read
@@ -135,8 +175,13 @@ if (typeof module !== "undefined") {
     batteryIcon: batteryIcon,
     stateLabel: stateLabel,
     deviceName: deviceName,
+    percentText: percentText,
     tooltip: tooltip,
-    barText: barText,
+    barIcon: barIcon,
+    showsLabel: showsLabel,
+    barLabel: barLabel,
+    fill: fill,
+    flag: flag,
     parseSolaar: parseSolaar
   }
 }

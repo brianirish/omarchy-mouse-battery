@@ -19,6 +19,8 @@ are invisible. This widget fills that gap:
   power widget
 - Tooltip with the device model, percentage, and state
   (`Logitech MX Master 2S · 55% · Discharging`)
+- Follows Omarchy's display language (Setup › Language), live, in all 50 of
+  its languages (see [Translations](#translations))
 - Hides itself when no wireless mouse/keyboard is connected
 - Left-click launches a configurable command (defaults to
   [OpenLogi](https://github.com/AprilNEA/OpenLogi)'s desktop app)
@@ -44,7 +46,15 @@ or any other `omarchy bar move` placement.
 
 ### Requirements
 
-- Omarchy 4.x (the Quickshell-based shell with `omarchy plugin`; developed on 4.0.3)
+- **Omarchy 4.5 or newer.** 2.0 uses the bar label and translation APIs that
+  4.5 introduced. On Omarchy 4.0, stay on the last 1.x release:
+
+  ```bash
+  git -C ~/.config/omarchy/plugins/brianirish.mouse-battery checkout v1.1.1
+  ```
+
+  (`omarchy plugin update` would move you back to 2.x, so update Omarchy
+  first.)
 - `upower` running (it is, on every Omarchy install)
 - A peripheral that shows up in `upower -e` — check with:
 
@@ -63,7 +73,7 @@ Settings live inline on the widget's `shell.json` entry and can be changed with
 
 | Key | Default | Meaning |
 |---|---|---|
-| `showPercentage` | `true` | Show `󰍽 55% 󰁿`. Set to `false` for the battery glyph alone (the percentage stays in the tooltip). Vertical bars always use the glyph-only form. |
+| `showPercentage` | `true` | Show `󰍽 55% 󰁿`. Set to `false` for the battery glyph alone (the percentage stays in the tooltip). Vertical bars always use the glyph-only form. `"true"` and `"false"` strings work too. |
 | `onClick` | `"openlogi-desktop"` | Command run on left-click. Set to `""` to disable. |
 | `solaarInterval` | `300` | Seconds between `solaar show` polls while UPower has no device (see [Bolt receivers](#bolt-receivers)). `0` disables the fallback. |
 
@@ -121,6 +131,16 @@ different labels. Expect the number to step between those values rather than
 tick down smoothly. Newer devices with the unified-battery feature report true
 percentages and the widget shows them as-is.
 
+## Translations
+
+The widget's text (the tooltip, the state words, the fallback device names)
+comes from the catalogs in [`i18n/`](i18n), one per Omarchy language, and
+follows Setup › Language without a shell restart. Numbers use the language's
+digits. `en.json` is the source; the other 49 catalogs were machine-translated,
+so corrections from native speakers are very welcome: edit `i18n/<code>.json`
+and open a pull request. A string missing from a catalog falls back to
+English.
+
 ## Troubleshooting
 
 **Widget doesn't appear.** It's hidden when no device matches. Run
@@ -149,12 +169,15 @@ QML load errors. `omarchy restart shell` forces a clean reload.
 ```bash
 git clone https://github.com/brianirish/omarchy-mouse-battery.git \
   ~/.config/omarchy/plugins/brianirish.mouse-battery
-scripts/check        # unit tests, qmllint, manifest validation — same as CI
+scripts/check        # unit tests, translations, qmllint, manifest validation — same as CI
 ```
 
 The pure logic (device selection, icon choice, labels) lives in `Model.js` and
 is unit-tested with plain Node (`node tests/model_test.js`). `Widget.qml` is a
-thin binding layer over it. See [CONTRIBUTING.md](CONTRIBUTING.md).
+thin binding layer over it. On an Omarchy machine `scripts/check` also
+type-checks the QML against the installed shell's own components
+(`scripts/qml-api-lint`), and CI does the same against the supported Omarchy
+release and, weekly, the newest one. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Uninstall
 

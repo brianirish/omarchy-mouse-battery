@@ -1,0 +1,11 @@
+{
+  "device.mouse": "עכבר אלחוטי",
+  "device.keyboard": "מקלדת אלחוטית",
+  "percent": "%1%",
+  "state.charging": "בטעינה",
+  "state.discharging": "בפריקה",
+  "state.full": "טעונה במלואה",
+  "state.empty": "ריקה",
+  "state.unknown": "לא ידוע",
+  "tooltip": "%1 · %2 · %3"
+}

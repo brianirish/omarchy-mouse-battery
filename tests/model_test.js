@@ -6,6 +6,8 @@ const assert = require("node:assert/strict");
 const path = require("node:path");
 
 const Model = require(path.join(__dirname, "..", "Model.js"));
+const { tr } = require(path.join(__dirname, "tr.js"));
+const en = tr("en");
 
 // Mirrors Quickshell's UPowerDeviceType / UPowerDeviceState enums by value.
 const Type = { Unknown: 0, LinePower: 1, Battery: 2, Mouse: 5, Keyboard: 6, Tablet: 10, GamingInput: 12, Touchpad: 14 };
@@ -89,31 +91,74 @@ test("batteryIcon is empty without a device", () => {
 
 // stateLabel / tooltip
 test("stateLabel maps every known state and falls back to Unknown", () => {
-  assert.equal(Model.stateLabel({ ...mouse, state: State.Charging }, State), "Charging");
-  assert.equal(Model.stateLabel(mouse, State), "Discharging");
-  assert.equal(Model.stateLabel({ ...mouse, state: State.FullyCharged }, State), "Fully charged");
-  assert.equal(Model.stateLabel({ ...mouse, state: State.Empty }, State), "Empty");
-  assert.equal(Model.stateLabel({ ...mouse, state: State.PendingCharge }, State), "Unknown");
-  assert.equal(Model.stateLabel(null, State), "");
+  assert.equal(Model.stateLabel({ ...mouse, state: State.Charging }, State, en), "Charging");
+  assert.equal(Model.stateLabel(mouse, State, en), "Discharging");
+  assert.equal(Model.stateLabel({ ...mouse, state: State.FullyCharged }, State, en), "Fully charged");
+  assert.equal(Model.stateLabel({ ...mouse, state: State.Empty }, State, en), "Empty");
+  assert.equal(Model.stateLabel({ ...mouse, state: State.PendingCharge }, State, en), "Unknown");
+  assert.equal(Model.stateLabel(null, State, en), "");
 });
 test("tooltip joins model, percent and state", () => {
-  assert.equal(Model.tooltip(mouse, State), "Logitech MX Master 2S · 55% · Discharging");
+  assert.equal(Model.tooltip(mouse, State, Type, en), "Logitech MX Master 2S · 55% · Discharging");
 });
 test("tooltip falls back to a generic name when the model is blank", () => {
-  assert.equal(Model.tooltip({ ...mouse, model: "" }, State), "Wireless mouse · 55% · Discharging");
-  assert.equal(Model.tooltip({ ...keyboard, model: "" }, State, Type), "Wireless keyboard · 20% · Discharging");
+  assert.equal(Model.tooltip({ ...mouse, model: "" }, State, Type, en), "Wireless mouse · 55% · Discharging");
+  assert.equal(Model.tooltip({ ...keyboard, model: "" }, State, Type, en), "Wireless keyboard · 20% · Discharging");
 });
 test("tooltip is empty without a device", () => {
-  assert.equal(Model.tooltip(null, State), "");
+  assert.equal(Model.tooltip(null, State, Type, en), "");
+});
+test("tooltip keeps a markup-shaped model name verbatim, for a plain-text sink", () => {
+  const sneaky = { ...mouse, model: '<img src="https://example.invalid/t">' };
+  assert.equal(Model.tooltip(sneaky, State, Type, en), '<img src="https://example.invalid/t"> · 55% · Discharging');
+});
+test("tooltip numbers go through formatNumber", () => {
+  const digits = (v) => String(v).replace(/[0-9]/g, (d) => "০১২৩৪৫৬৭৮৯"[d]);
+  assert.equal(Model.tooltip(mouse, State, Type, en, digits), "Logitech MX Master 2S · ৫৫% · Discharging");
 });
 
-// barText
-test("barText shows device glyph, percent and battery glyph horizontally", () => {
-  assert.equal(Model.barText(mouse, { showPercentage: true, vertical: false }, Type, State), "󰍽 55% 󰁿");
+// flag
+test("flag reads booleans and the strings omarchy bar set stores", () => {
+  assert.equal(Model.flag(true, false), true);
+  assert.equal(Model.flag("true", false), true);
+  assert.equal(Model.flag(false, true), false);
+  assert.equal(Model.flag("false", true), false);
 });
-test("barText falls back to the battery glyph alone when vertical or percent is off", () => {
-  assert.equal(Model.barText(mouse, { showPercentage: true, vertical: true }, Type, State), "󰁿");
-  assert.equal(Model.barText(mouse, { showPercentage: false, vertical: false }, Type, State), "󰁿");
+test("flag falls back on anything else", () => {
+  assert.equal(Model.flag(undefined, true), true);
+  assert.equal(Model.flag("yes", false), false);
+  assert.equal(Model.flag(1, false), false);
+});
+
+// fill
+test("fill replaces numbered placeholders, in any order", () => {
+  assert.equal(Model.fill("%2 then %1", ["a", "b"]), "b then a");
+});
+test("fill reads %%1 as a percent sign before the value, as Turkish writes it", () => {
+  assert.equal(Model.fill("%%1", [55]), "%55");
+});
+test("fill leaves a placeholder without a value alone", () => {
+  assert.equal(Model.fill("%1 %2", ["a"]), "a %2");
+});
+
+// barIcon / barLabel
+test("barIcon is the battery glyph", () => {
+  assert.equal(Model.barIcon(mouse, State), "󰁿");
+  assert.equal(Model.barIcon(null, State), "");
+});
+test("barLabel shows the device glyph and percent horizontally", () => {
+  assert.equal(Model.barLabel(mouse, { showPercentage: true, vertical: false }, Type, en), "󰍽 55%");
+  assert.equal(Model.barLabel(keyboard, { showPercentage: true, vertical: false }, Type, en), "󰌌 20%");
+});
+test("barLabel is empty when vertical, with percent off, or without a device", () => {
+  assert.equal(Model.barLabel(mouse, { showPercentage: true, vertical: true }, Type, en), "");
+  assert.equal(Model.barLabel(mouse, { showPercentage: false, vertical: false }, Type, en), "");
+  assert.equal(Model.barLabel(null, { showPercentage: true, vertical: false }, Type, en), "");
+});
+test("showsLabel needs showPercentage on and a horizontal bar", () => {
+  assert.equal(Model.showsLabel({ showPercentage: true, vertical: false }), true);
+  assert.equal(Model.showsLabel({ showPercentage: true, vertical: true }), false);
+  assert.equal(Model.showsLabel({ showPercentage: "true", vertical: false }), false);
 });
 
 // parseSolaar — fallback for receivers the kernel driver doesn't bind (Bolt)

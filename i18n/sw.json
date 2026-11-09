@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Kipanya kisichotumia waya",
+  "device.keyboard": "Kibodi isiyotumia waya",
+  "percent": "%1%",
+  "state.charging": "Inachaji",
+  "state.discharging": "Inapungua chaji",
+  "state.full": "Imejaa chaji",
+  "state.empty": "Tupu",
+  "state.unknown": "Haijulikani",
+  "tooltip": "%1 · %2 · %3"
+}

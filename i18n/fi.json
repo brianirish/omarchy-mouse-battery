@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Langaton hiiri",
+  "device.keyboard": "Langaton näppäimistö",
+  "percent": "%1%",
+  "state.charging": "Latautuu",
+  "state.discharging": "Purkautuu",
+  "state.full": "Täyteen ladattu",
+  "state.empty": "Tyhjä",
+  "state.unknown": "Tuntematon",
+  "tooltip": "%1 · %2 · %3"
+}

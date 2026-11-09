@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Simsiz sichqoncha",
+  "device.keyboard": "Simsiz klaviatura",
+  "percent": "%1%",
+  "state.charging": "Quvvatlanmoqda",
+  "state.discharging": "Zaryadsizlanmoqda",
+  "state.full": "To‘liq quvvatlangan",
+  "state.empty": "Bo‘sh",
+  "state.unknown": "Noma’lum",
+  "tooltip": "%1 · %2 · %3"
+}

@@ -7,6 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-11-09
+
+Omarchy 4.5 support. 2.0 needs Omarchy 4.5 or newer; on 4.0, stay on 1.1.1
+(`git -C ~/.config/omarchy/plugins/brianirish.mouse-battery checkout v1.1.1`).
+
+### Fixed
+
+- On Omarchy 4.5 the bar showed three dots instead of `󰍽 55% 󰁿`: 4.5 fits a
+  bar icon's text into a single icon box, so the whole string shrank. The
+  battery glyph is now the icon, and the device glyph and percentage are drawn
+  as a label beside it, the way the built-in battery widget does.
+- `showPercentage` accepts the `"true"`/`"false"` strings that
+  `omarchy bar set` stores without `--json`; `"true"` used to hide the
+  percentage.
+
+### Added
+
+- Translations. The tooltip, state words and fallback device names follow
+  Omarchy's display language (Setup › Language) live, in all 50 of its
+  languages, with numbers in the language's digits. English is the source;
+  the other catalogs are machine-translated and corrections are welcome.
+- `scripts/qml-api-lint` type-checks the QML against a real Omarchy shell's
+  components, which plain qmllint can't resolve. `scripts/check` runs it on an
+  Omarchy machine, and a new CI job runs it on Arch's Qt and Quickshell
+  against Omarchy v4.5.0 for every change and against the newest Omarchy
+  release every week.
+- `tests/i18n_test.js` checks the catalogs the way Omarchy checks its own:
+  every key used is defined, placeholders and plural forms match English, and
+  (with `I18N_STRICT=1`, for releases) every language is complete.
+
+### Changed
+
+- The vendored `omarchy-plugin-validate` is refreshed from Omarchy v4.5.0 and
+  knows the new `centerBegin`, `centerEnd` and `tray` sections.
+- `actions/setup-node` is bumped to v7.1.0.
+
+### Removed
+
+- Support for Omarchy 4.0 and earlier.
+
 ## [1.1.1] - 2026-09-22
 
 ### Fixed

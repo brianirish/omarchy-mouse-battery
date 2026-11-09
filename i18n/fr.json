@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Souris sans fil",
+  "device.keyboard": "Clavier sans fil",
+  "percent": "%1%",
+  "state.charging": "En charge",
+  "state.discharging": "En décharge",
+  "state.full": "Complètement chargée",
+  "state.empty": "Vide",
+  "state.unknown": "Inconnu",
+  "tooltip": "%1 · %2 · %3"
+}

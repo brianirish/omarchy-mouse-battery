@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Kablosuz fare",
+  "device.keyboard": "Kablosuz klavye",
+  "percent": "%1%",
+  "state.charging": "Şarj oluyor",
+  "state.discharging": "Deşarj oluyor",
+  "state.full": "Tamamen şarj oldu",
+  "state.empty": "Boş",
+  "state.unknown": "Bilinmiyor",
+  "tooltip": "%1 · %2 · %3"
+}

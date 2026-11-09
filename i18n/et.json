@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Juhtmeta hiir",
+  "device.keyboard": "Juhtmeta klaviatuur",
+  "percent": "%1%",
+  "state.charging": "Laeb",
+  "state.discharging": "Tühjeneb",
+  "state.full": "Täielikult laetud",
+  "state.empty": "Tühi",
+  "state.unknown": "Teadmata",
+  "tooltip": "%1 · %2 · %3"
+}

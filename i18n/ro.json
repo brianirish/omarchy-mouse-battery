@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Mouse wireless",
+  "device.keyboard": "Tastatură wireless",
+  "percent": "%1%",
+  "state.charging": "Se încarcă",
+  "state.discharging": "Se descarcă",
+  "state.full": "Încărcată complet",
+  "state.empty": "Descărcată",
+  "state.unknown": "Necunoscut",
+  "tooltip": "%1 · %2 · %3"
+}

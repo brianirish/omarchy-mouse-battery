@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Þráðlaus mús",
+  "device.keyboard": "Þráðlaust lyklaborð",
+  "percent": "%1%",
+  "state.charging": "Í hleðslu",
+  "state.discharging": "Afhleðst",
+  "state.full": "Fullhlaðin",
+  "state.empty": "Tóm",
+  "state.unknown": "Óþekkt",
+  "tooltip": "%1 · %2 · %3"
+}

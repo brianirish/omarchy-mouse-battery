@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Kabellose Maus",
+  "device.keyboard": "Kabellose Tastatur",
+  "percent": "%1%",
+  "state.charging": "Wird geladen",
+  "state.discharging": "Wird entladen",
+  "state.full": "Vollständig geladen",
+  "state.empty": "Leer",
+  "state.unknown": "Unbekannt",
+  "tooltip": "%1 · %2 · %3"
+}

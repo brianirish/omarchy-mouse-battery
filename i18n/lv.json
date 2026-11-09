@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Bezvadu pele",
+  "device.keyboard": "Bezvadu tastatūra",
+  "percent": "%1%",
+  "state.charging": "Uzlādējas",
+  "state.discharging": "Izlādējas",
+  "state.full": "Pilnībā uzlādēta",
+  "state.empty": "Tukša",
+  "state.unknown": "Nezināms",
+  "tooltip": "%1 · %2 · %3"
+}

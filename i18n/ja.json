@@ -1,0 +1,11 @@
+{
+  "device.mouse": "ワイヤレスマウス",
+  "device.keyboard": "ワイヤレスキーボード",
+  "percent": "%1%",
+  "state.charging": "充電中",
+  "state.discharging": "放電中",
+  "state.full": "充電完了",
+  "state.empty": "空",
+  "state.unknown": "不明",
+  "tooltip": "%1 · %2 · %3"
+}

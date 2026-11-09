@@ -1,0 +1,11 @@
+{
+  "device.mouse": "ماوس بی‌سیم",
+  "device.keyboard": "صفحه‌کلید بی‌سیم",
+  "percent": "%1%",
+  "state.charging": "در حال شارژ",
+  "state.discharging": "در حال تخلیه",
+  "state.full": "کاملاً شارژ شده",
+  "state.empty": "خالی",
+  "state.unknown": "نامشخص",
+  "tooltip": "%1 · %2 · %3"
+}
