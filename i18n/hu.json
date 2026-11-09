@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Vezeték nélküli egér",
+  "device.keyboard": "Vezeték nélküli billentyűzet",
+  "percent": "%1%",
+  "state.charging": "Töltődik",
+  "state.discharging": "Merül",
+  "state.full": "Teljesen feltöltve",
+  "state.empty": "Üres",
+  "state.unknown": "Ismeretlen",
+  "tooltip": "%1 · %2 · %3"
+}

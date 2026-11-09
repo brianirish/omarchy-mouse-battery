@@ -1,0 +1,11 @@
+{
+  "device.mouse": "வயர்லெஸ் சுட்டி",
+  "device.keyboard": "வயர்லெஸ் விசைப்பலகை",
+  "percent": "%1%",
+  "state.charging": "சார்ஜ் ஆகிறது",
+  "state.discharging": "சார்ஜ் குறைகிறது",
+  "state.full": "முழுமையாக சார்ஜ் ஆனது",
+  "state.empty": "காலி",
+  "state.unknown": "தெரியவில்லை",
+  "tooltip": "%1 · %2 · %3"
+}

@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Bezdrôtová myš",
+  "device.keyboard": "Bezdrôtová klávesnica",
+  "percent": "%1%",
+  "state.charging": "Nabíja sa",
+  "state.discharging": "Vybíja sa",
+  "state.full": "Úplne nabitá",
+  "state.empty": "Vybitá",
+  "state.unknown": "Neznámy",
+  "tooltip": "%1 · %2 · %3"
+}

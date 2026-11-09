@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Mouse inalámbrico",
+  "device.keyboard": "Teclado inalámbrico",
+  "percent": "%1%",
+  "state.charging": "Cargando",
+  "state.discharging": "Descargando",
+  "state.full": "Carga completa",
+  "state.empty": "Vacía",
+  "state.unknown": "Desconocido",
+  "tooltip": "%1 · %2 · %3"
+}

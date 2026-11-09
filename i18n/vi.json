@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Chuột không dây",
+  "device.keyboard": "Bàn phím không dây",
+  "percent": "%1%",
+  "state.charging": "Đang sạc",
+  "state.discharging": "Đang xả",
+  "state.full": "Đã sạc đầy",
+  "state.empty": "Hết pin",
+  "state.unknown": "Không xác định",
+  "tooltip": "%1 · %2 · %3"
+}

@@ -1,0 +1,11 @@
+{
+  "device.mouse": "वायरलेस माउस",
+  "device.keyboard": "वायरलेस कीबोर्ड",
+  "percent": "%1%",
+  "state.charging": "चार्ज हो रही है",
+  "state.discharging": "डिस्चार्ज हो रही है",
+  "state.full": "पूरी तरह चार्ज",
+  "state.empty": "खाली",
+  "state.unknown": "अज्ञात",
+  "tooltip": "%1 · %2 · %3"
+}

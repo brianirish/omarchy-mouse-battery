@@ -1,0 +1,11 @@
+{
+  "device.mouse": "無線滑鼠",
+  "device.keyboard": "無線鍵盤",
+  "percent": "%1%",
+  "state.charging": "充電中",
+  "state.discharging": "放電中",
+  "state.full": "已充飽",
+  "state.empty": "電量耗盡",
+  "state.unknown": "未知",
+  "tooltip": "%1 · %2 · %3"
+}

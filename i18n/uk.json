@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Бездротова миша",
+  "device.keyboard": "Бездротова клавіатура",
+  "percent": "%1%",
+  "state.charging": "Заряджається",
+  "state.discharging": "Розряджається",
+  "state.full": "Повністю заряджена",
+  "state.empty": "Розряджена",
+  "state.unknown": "Невідомо",
+  "tooltip": "%1 · %2 · %3"
+}

@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Mouse sem fio",
+  "device.keyboard": "Teclado sem fio",
+  "percent": "%1%",
+  "state.charging": "Carregando",
+  "state.discharging": "Descarregando",
+  "state.full": "Carga completa",
+  "state.empty": "Vazia",
+  "state.unknown": "Desconhecido",
+  "tooltip": "%1 · %2 · %3"
+}

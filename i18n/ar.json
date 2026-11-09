@@ -1,0 +1,11 @@
+{
+  "device.mouse": "فأرة لاسلكية",
+  "device.keyboard": "لوحة مفاتيح لاسلكية",
+  "percent": "%1%",
+  "state.charging": "قيد الشحن",
+  "state.discharging": "قيد التفريغ",
+  "state.full": "مشحونة بالكامل",
+  "state.empty": "فارغة",
+  "state.unknown": "غير معروف",
+  "tooltip": "%1 · %2 · %3"
+}

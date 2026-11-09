@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Mysz bezprzewodowa",
+  "device.keyboard": "Klawiatura bezprzewodowa",
+  "percent": "%1%",
+  "state.charging": "Ładowanie",
+  "state.discharging": "Rozładowywanie",
+  "state.full": "W pełni naładowana",
+  "state.empty": "Pusta",
+  "state.unknown": "Nieznany",
+  "tooltip": "%1 · %2 · %3"
+}

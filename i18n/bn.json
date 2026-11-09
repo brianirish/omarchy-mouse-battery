@@ -1,0 +1,11 @@
+{
+  "device.mouse": "ওয়্যারলেস মাউস",
+  "device.keyboard": "ওয়্যারলেস কিবোর্ড",
+  "percent": "%1%",
+  "state.charging": "চার্জ হচ্ছে",
+  "state.discharging": "ডিসচার্জ হচ্ছে",
+  "state.full": "সম্পূর্ণ চার্জড",
+  "state.empty": "খালি",
+  "state.unknown": "অজানা",
+  "tooltip": "%1 · %2 · %3"
+}

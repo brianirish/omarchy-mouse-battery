@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Draadloze muis",
+  "device.keyboard": "Draadloos toetsenbord",
+  "percent": "%1%",
+  "state.charging": "Opladen",
+  "state.discharging": "Ontladen",
+  "state.full": "Volledig opgeladen",
+  "state.empty": "Leeg",
+  "state.unknown": "Onbekend",
+  "tooltip": "%1 · %2 · %3"
+}

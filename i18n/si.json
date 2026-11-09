@@ -1,0 +1,11 @@
+{
+  "device.mouse": "රැහැන් රහිත මූසිකය",
+  "device.keyboard": "රැහැන් රහිත යතුරු පුවරුව",
+  "percent": "%1%",
+  "state.charging": "ආරෝපණය වෙමින්",
+  "state.discharging": "විසර්ජනය වෙමින්",
+  "state.full": "සම්පූර්ණයෙන් ආරෝපිතයි",
+  "state.empty": "හිස්",
+  "state.unknown": "නොදනී",
+  "tooltip": "%1 · %2 · %3"
+}

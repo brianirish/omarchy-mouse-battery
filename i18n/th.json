@@ -1,0 +1,11 @@
+{
+  "device.mouse": "เมาส์ไร้สาย",
+  "device.keyboard": "คีย์บอร์ดไร้สาย",
+  "percent": "%1%",
+  "state.charging": "กำลังชาร์จ",
+  "state.discharging": "กำลังคายประจุ",
+  "state.full": "ชาร์จเต็มแล้ว",
+  "state.empty": "หมด",
+  "state.unknown": "ไม่ทราบ",
+  "tooltip": "%1 · %2 · %3"
+}

@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Ratolí sense fil",
+  "device.keyboard": "Teclat sense fil",
+  "percent": "%1%",
+  "state.charging": "Carregant",
+  "state.discharging": "Descarregant",
+  "state.full": "Totalment carregada",
+  "state.empty": "Buida",
+  "state.unknown": "Desconegut",
+  "tooltip": "%1 · %2 · %3"
+}

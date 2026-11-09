@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Mouse nirkabel",
+  "device.keyboard": "Keyboard nirkabel",
+  "percent": "%1%",
+  "state.charging": "Mengisi daya",
+  "state.discharging": "Mengosongkan daya",
+  "state.full": "Terisi penuh",
+  "state.empty": "Kosong",
+  "state.unknown": "Tidak diketahui",
+  "tooltip": "%1 · %2 · %3"
+}

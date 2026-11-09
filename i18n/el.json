@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Ασύρματο ποντίκι",
+  "device.keyboard": "Ασύρματο πληκτρολόγιο",
+  "percent": "%1%",
+  "state.charging": "Φορτίζει",
+  "state.discharging": "Αποφορτίζεται",
+  "state.full": "Πλήρως φορτισμένη",
+  "state.empty": "Άδεια",
+  "state.unknown": "Άγνωστο",
+  "tooltip": "%1 · %2 · %3"
+}

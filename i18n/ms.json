@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Tetikus tanpa wayar",
+  "device.keyboard": "Papan kekunci tanpa wayar",
+  "percent": "%1%",
+  "state.charging": "Sedang dicas",
+  "state.discharging": "Sedang menyahcas",
+  "state.full": "Dicas penuh",
+  "state.empty": "Kosong",
+  "state.unknown": "Tidak diketahui",
+  "tooltip": "%1 · %2 · %3"
+}

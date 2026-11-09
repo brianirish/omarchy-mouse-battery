@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Bežični miš",
+  "device.keyboard": "Bežična tipkovnica",
+  "percent": "%1%",
+  "state.charging": "Puni se",
+  "state.discharging": "Prazni se",
+  "state.full": "Potpuno napunjena",
+  "state.empty": "Prazna",
+  "state.unknown": "Nepoznato",
+  "tooltip": "%1 · %2 · %3"
+}

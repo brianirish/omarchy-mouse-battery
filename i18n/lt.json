@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Belaidė pelė",
+  "device.keyboard": "Belaidė klaviatūra",
+  "percent": "%1%",
+  "state.charging": "Įkraunama",
+  "state.discharging": "Išsikrauna",
+  "state.full": "Visiškai įkrauta",
+  "state.empty": "Tuščia",
+  "state.unknown": "Nežinoma",
+  "tooltip": "%1 · %2 · %3"
+}
