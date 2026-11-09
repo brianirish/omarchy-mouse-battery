@@ -1,0 +1,11 @@
+{
+  "device.mouse": "Wireless mouse",
+  "device.keyboard": "Wireless keyboard",
+  "percent": "%1%",
+  "state.charging": "Charging",
+  "state.discharging": "Discharging",
+  "state.full": "Fully charged",
+  "state.empty": "Empty",
+  "state.unknown": "Unknown",
+  "tooltip": "%1 · %2 · %3"
+}

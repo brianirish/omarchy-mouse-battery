@@ -20,7 +20,9 @@ BarWidget {
   id: root
   moduleName: "brianirish.mouse-battery"
 
-  readonly property bool showPercentage: setting("showPercentage", true) === true
+  Translations { id: strings; directory: Qt.resolvedUrl("i18n") }
+
+  readonly property bool showPercentage: Model.flag(setting("showPercentage", true), true)
   readonly property string clickCommand: String(setting("onClick", "openlogi-desktop") || "")
   readonly property int solaarInterval: Math.max(0, Number(setting("solaarInterval", 300)) || 0)
 
@@ -51,12 +53,17 @@ BarWidget {
     : (useSolaar ? Model.pickDevice(solaarDevices, types()) : null)
   readonly property bool present: device !== null
 
-  // QML tracks the device.percentage/state reads inside Model.*, so these
-  // re-evaluate when UPower reports a change.
-  readonly property string barText: present
-    ? Model.barText(device, { showPercentage: showPercentage, vertical: vertical }, types(), states())
+  // QML tracks the device.percentage/state reads inside Model.*, and the
+  // catalog reads inside strings.t(), so these re-evaluate when UPower
+  // reports a change or the language changes.
+  readonly property var layout: ({ showPercentage: showPercentage, vertical: vertical })
+  readonly property string barIcon: present ? Model.barIcon(device, states()) : ""
+  readonly property string barLabel: present
+    ? Model.barLabel(device, layout, types(), strings, v => I18n.formatNumber(v))
     : ""
-  readonly property string tooltip: present ? Model.tooltip(device, states(), types()) : ""
+  readonly property string tooltip: present
+    ? Model.tooltip(device, states(), types(), strings, v => I18n.formatNumber(v))
+    : ""
 
   function activate() {
     if (root.bar && root.clickCommand !== "") root.bar.run(root.clickCommand)
@@ -110,8 +117,11 @@ BarWidget {
     id: button
     anchors.fill: parent
     bar: root.bar
-    text: root.barText
-    slotSize: Style.bar.iconSlot * (root.showPercentage && !vertical ? 3 : 1)
+    // Omarchy 4.5 fits the icon text into one icon box, so the device glyph
+    // and percent go in the label beside it, as the built-in battery does.
+    text: root.barIcon
+    labelText: root.barLabel
+    slotSize: Style.bar.iconSlot * (Model.showsLabel(root.layout) ? 3 : 1)
     tooltipText: root.tooltip
     onPressed: root.activate()
   }
